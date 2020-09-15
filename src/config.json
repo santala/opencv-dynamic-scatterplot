@@ -1,0 +1,94 @@
+{
+  "designSpaceAlt": {
+    "aspectDiff": {
+      "min": -1,
+      "max": 1,
+      "step": 0.2
+    },
+    "markerSize": {
+      "min": 2,
+      "max": 20,
+      "step": 2
+    },
+    "markerOpacity": {
+      "min": 5,
+      "max": 255,
+      "step": 1
+    }
+  },
+  "metrics": {
+    "angle_diff": "Angle error",
+    "axes_length_ratio_diff": "Axes length error",
+    "avg_opacity": "Avg. opacity",
+    "contrast": "Contrast",
+    "avg_opacity_dist": "Opacity error",
+    "contrast_dist": "Contrast error",
+    "overlapping": "Overlap",
+    "overplotting": "Overplotting",
+    "class_separability": "Class separability",
+    "outlier_separability": "Outlier separability"
+  },
+  "weightPresets": {
+    "Correlation estimation": [
+      0.5,
+      1.0,
+      -0.5,
+      0.0,
+      0.5,
+      0.5,
+      -0.5,
+      0.5,
+      0.0,
+      0.0
+    ],
+    "Outlier detection": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.5,
+      0.5,
+      -0.5,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "Class separation": [
+      0.5,
+      1.0,
+      -0.5,
+      0.0,
+      0.0,
+      -0.5,
+      -0.5,
+      0.0,
+      0.5,
+      0.0
+    ]
+  },
+  "csvParser": {
+    "userInput": {
+      "delimiter": "",
+      "newline": "",
+      "quoteChar": "\"",
+      "escapeChar": "\"",
+      "dynamicTyping": true,
+      "encoding": "utf-8",
+      "worker": true,
+      "comments": false,
+      "skipEmptyLines": "greedy"
+    }
+  },
+  "exampleDataSets": [
+    ["Age balance", "./example-data/bank-full_age_balance_3out.csv"],
+    ["Isabel 1k", "./example-data/isabel_1k.csv"],
+    ["Isabel 4k", "./example-data/isabel_4k.csv"],
+    ["Isabel 16k", "./example-data/isabel_16k.csv"],
+    ["Isabel 63k", "./example-data/isabel_63k.csv"],
+    ["Isabel 250k", "./example-data/isabel_250k.csv"],
+    ["ACTG 320 NCC", "./example-data/actg320ncc.csv"],
+    ["Out 5D", "./example-data/out5d.csv"],
+    ["Poverty", "./example-data/poverty.csv"],
+    ["Shock", "./example-data/shock.csv"]
+  ]
+}

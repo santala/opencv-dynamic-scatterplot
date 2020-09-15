@@ -1,0 +1,383 @@
+@import "~normalize.css/normalize.css";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+
+@mixin icon($icon-var) {
+  @include fa-icon;
+  font-family: "Font Awesome 5 Free";
+  content: fa-content($icon-var);
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-family: "Source Sans Pro", monospace;
+  text-rendering: optimizeLegibility;
+  color: #000;
+  background: white;
+}
+
+#app {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#main {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  padding: .25rem;
+
+  > * {
+    margin: .25rem;
+  }
+}
+
+$color-primary: hsl(215, 100, 60);
+$color-primary-dark: hsl(215, 100, 40);
+$color-gray: hsl(215, 0, 60);
+$color-gray-dark: hsl(215, 0, 40);
+
+$border-radius: 4px;
+
+button {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  padding: .25rem .5rem !important;
+  background: $color-primary;
+  border: 0;
+  border-radius: $border-radius;
+  box-shadow: 0 1px 0 $color-primary-dark;
+  color: white !important;
+  font-size: 1rem;
+
+  fieldset[disabled] &, &[disabled] {
+    background: $color-gray;
+    box-shadow: 0 1px 0 $color-gray-dark;
+  }
+
+  fieldset:not([disabled]) &:not([disabled]) {
+    &:hover:not(:active) {
+      top: -1px;
+      box-shadow: 0 2px 0 $color-primary-dark;
+    }
+  }
+
+  &.reload::before {
+    @include icon($fa-var-redo);
+  }
+}
+
+input[type=text] {
+  border: 2px solid $color-gray;
+  border-radius: $border-radius;
+  outline: 0;
+
+  &:focus {
+    border-color: $color-primary;
+  }
+}
+
+.data-import {
+  width: 10%;
+  flex-basis: 0;
+  flex-grow: 1;
+  flex-shrink: 3;
+  border-radius: $border-radius;
+  background: #202020;
+  padding: 0;
+
+  fieldset {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: #202020;
+    color: white;
+    border-radius: $border-radius;
+
+    &[disabled] {
+      display: none;
+    }
+
+    .loading {
+      visibility: hidden;
+      &.show {
+        visibility: visible;
+      }
+    }
+
+    legend {
+      float: left;
+      display: block;
+      width: 100% !important;
+      padding: 0.5rem;
+      margin: 0;
+      background: black;
+      border-radius: $border-radius $border-radius 0 0;
+      font-size: 1rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: .1rem;
+
+      & ~ * {
+        clear: both;
+      }
+    }
+
+    > * {
+      margin: .5rem;
+    }
+
+    label {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0;
+      padding: .5rem;
+
+      & > * {
+        margin: 0 .25rem;
+      }
+
+      &.stack {
+        flex-direction: column;
+      }
+
+      & > input[type=text][size="10"] {
+        flex-grow: 2;
+      }
+
+      input[type=radio], input[type=checkbox] {
+        & ~ * {
+          margin-left: .5rem;
+        }
+        &:checked ~ .label {
+          font-weight: bold;
+        }
+      }
+    }
+
+    table {
+      font-family: "Source Code Pro", monospace;
+      font-size: 0.75rem;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid $color-gray;
+      padding: 0.1rem;
+    }
+  }
+}
+
+.scatterplot {
+  position: relative;
+  flex-basis: auto;
+  flex-grow: 2;
+  flex-shrink: 0;
+}
+
+.overlay {
+  position: absolute;
+  z-index: 99;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  background: rgba(32, 32, 32, .9); /* Could be used to toggle a transparency effect when focus not in menu */
+  border-radius: 0.2rem;
+  transition: background 0.15s cubic-bezier(0.25, 0.1, 0.25, 1);
+  color: white;
+
+  & + .overlay {
+    bottom: 0;
+  }
+
+  &:focus,
+  &:focus-within {
+    /*pointer-events: none;*/
+    outline: none;
+    background: rgba(32, 32, 32, 1);
+  }
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border: 1px solid black;
+  border-radius: $border-radius;
+}
+
+progress {
+  height: 1rem;
+  width: 10rem;
+}
+
+
+summary {
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding-left: 1rem;
+
+  &:focus {
+    outline: none;
+  }
+
+  display: block;
+  font-size: 1rem;
+  line-height: 1rem;
+  vertical-align: baseline;
+  font-weight: bold;
+  color: #fff;
+
+  // Hide default detail/summary triangle
+  list-style: none;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  // Custom indicator
+  .overlay > &::after {
+    @include icon($fa-var-expand-alt);
+    @include fa-icon-rotate(90deg, 1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0.5rem;
+    display: block;
+    font-size: 0.75rem;
+    line-height: 17px;
+    text-transform: uppercase;
+  }
+  .overlay[open] > &::after {
+    @include icon($fa-var-compress-alt);
+    @include fa-icon-rotate(90deg, 1);
+    line-height: 18px;
+  }
+}
+.controls {
+  display: table;
+
+  label {
+    display: table-row;
+    flex-direction: row;
+
+    > * {
+      display: table-cell;
+      padding: 0.25rem;
+    }
+
+    .label {
+      white-space: nowrap;
+    }
+
+    .value {
+      width: 3rem;
+      text-align: center;
+    }
+
+  }
+}
+
+
+// Range input
+
+@mixin range-track {
+  width: 100%;
+  height: 0.25rem;
+  cursor: pointer;
+  background: #000;
+  border: 0;
+  border-radius: .25rem;
+  //box-shadow: inset 0 0.375rem 0 0 #202020, inset 0 -0.375rem 0 0 #202020;
+}
+
+@mixin range-thumb {
+  margin-top: -.375rem;
+  height: 1rem;
+  width: 1rem;
+  background: #bbb;
+  cursor: pointer;
+  -webkit-appearance: none;
+  border: 0;
+  border-radius: 0.5rem;
+  transition: transform 0.15s cubic-bezier(0.25, 0.1, 0.25, 1),
+  background 0.15s cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  &:active, &:focus, &:hover {
+    background: #fff;
+    transform: scale(1.25);
+  }
+  :hover > & {
+    background: #fff;
+  }
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  margin: 0;
+  width: 100%;
+  min-width: 200px;
+  background: transparent;
+
+  &:focus {
+    outline: none;
+  }
+  &::-webkit-slider-runnable-track { @include range-track; }
+  &::-moz-range-track { @include range-track; }
+  &::-ms-track {
+    @include range-track;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+  }
+  &::-ms-fill-lower, &::-ms-fill-upper {
+    background: #202020;
+  }
+
+  &::-webkit-slider-thumb { @include range-thumb; }
+  &::-moz-range-thumb { @include range-thumb; }
+  &::-ms-thumb { @include range-thumb; }
+}
+
+// File input
+
+input[type=file] {
+  display: block;
+  text-align: center !important;
+  color: transparent;
+  width: 100% !important;
+
+  &::-webkit-file-upload-button {
+    display: none;
+  }
+
+  &::before {
+    @extend button;
+    display: block;
+    padding: 4px;
+    content: "Select CSV file";
+    color: black;
+    text-align: center;
+
+    &:hover, &:active {
+
+    }
+  }
+}
