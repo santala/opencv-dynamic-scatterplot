@@ -80,7 +80,6 @@
     }
   },
   "exampleDataSets": [
-    ["Age balance", "./example-data/bank-full_age_balance_3out.csv"],
     ["Isabel 1k", "./example-data/isabel_1k.csv"],
     ["Isabel 4k", "./example-data/isabel_4k.csv"],
     ["Isabel 16k", "./example-data/isabel_16k.csv"],

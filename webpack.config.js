@@ -59,13 +59,14 @@ module.exports = {
     ],
   },
   plugins: [
-      new HtmlWebPackPlugin({
-          template: './src/index.html',
-          filename: './index.html'
-      }),
-      new CopyPlugin([
-          { from: './src/example-data', to: './example-data' },
-          { from: './src/opencv.js', to: './opencv.js' },
-      ]),
+    new HtmlWebPackPlugin({
+        template: './src/index.html',
+        filename: './index.html'
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: './src/example-data', to: './example-data' },
+        { from: './src/opencv.js', to: './opencv.js' },
+    ]}),
   ]
 };
