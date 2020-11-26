@@ -1,6 +1,13 @@
 @import "~normalize.css/normalize.css";
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
 
+$color-primary: hsl(215, 100, 60);
+$color-primary-dark: hsl(215, 100, 40);
+$color-gray: hsl(215, 0, 60);
+$color-gray-dark: hsl(215, 0, 40);
+
+$border-radius: 4px;
+
 @mixin icon($icon-var) {
   @include fa-icon;
   font-family: "Font Awesome 5 Free";
@@ -22,12 +29,27 @@ html, body {
   position: absolute;
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+#reference-links {
+  flex-grow: 0;
+  margin: .5rem .5rem 0;
+  padding: .5rem;
+  border-radius: $border-radius;
+  background: $color-primary;
+
+  a {
+    color: white;
+    margin-right: .5rem;
+  }
 }
 
 #main {
   box-sizing: border-box;
   width: 100%;
-  height: 100%;
+  flex-grow: 1;
   display: flex;
   flex-direction: row;
   padding: .25rem;
@@ -37,12 +59,7 @@ html, body {
   }
 }
 
-$color-primary: hsl(215, 100, 60);
-$color-primary-dark: hsl(215, 100, 40);
-$color-gray: hsl(215, 0, 60);
-$color-gray-dark: hsl(215, 0, 40);
 
-$border-radius: 4px;
 
 button {
   position: relative;

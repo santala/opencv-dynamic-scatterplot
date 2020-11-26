@@ -85,10 +85,16 @@ class App extends React.Component {
 
     render() {
         const { renderer, data } = this.state;
-        return <div id="main">
-            <DataImport onExport={({ points }) => this.setState( { points })}/>
-            <ManualScatterplot renderer={renderer} data={data} />
-        </div>
+        return <>
+            <div id="reference-links">
+                <a href="https://doi.org/10.2312/evs.20201058">Read the paper</a>
+                <a href="https://github.com/santala/opencv-dynamic-scatterplot/">Source code on GitHub</a>
+            </div>
+            <div id="main">
+                <DataImport onExport={({ points }) => this.setState( { points })}/>
+                <ManualScatterplot renderer={renderer} data={data} />
+            </div>
+        </>
     }
 }
 
